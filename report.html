@@ -21134,6 +21134,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> The data points with indexes 65, 66, 75, 128 and 154 are considered outliers for more than one feature and therefore lead to a biased correlation of those features. These data points should be removed from the dataset. Outliers will shew our data and induce misleading representations of our models, resulting in poorer performance.</p>
+<p><strong>Review:</strong> <em>We don't want to reduce our dataset size too much, given that it's already quite small. Also, outliers can contain valuable information that we may want to analyze. In this case, those outliers may be very important customers, and we should be careful not to neglect them.</em></p>
 
 </div>
 </div>
@@ -21804,6 +21805,14 @@ iIiIiIiIiIT4P7qrsa29eEuDAAAAAElFTkSuQmCC
 <li>PC2: This customer type tends to buy a significants quantities of <em>Fresh</em>, <em>Frozen</em> and <em>Delicatessen</em> and small quantities of the other categories.</li>
 <li>PC3: This customer type tend to buy significants quantities of <em>Delicatessen</em> and <em>Frozen</em>, some <em>Milk</em> and tend not to buy <em>Fresh</em> at all. He is also not interested in <em>Detergents_Paper</em>.</li>
 <li>PC4: This customer type tends to buy significants quantities of <em>Frozen</em> some <em>Detergents_Paper</em> and tend strongly not to buy <em>Delicatessen</em>. He is also not interested in <em>Fresh</em>.</li>
+</ul>
+<p><strong>Review:</strong> The total variance explained by the two first principal components is 70.68%. That value is 93.11% for the first four principal components and therefore capturing the quasi-totality of information in our data.
+These PCs represent patterns of spending in the categories with the weights showing the direction and strength of the correlations.</p>
+<ul>
+<li>PC1: This dimension exhibits large positive weights in <em>Detergents_Paper</em>, <em>Grocery</em> and <em>Milk</em> which means that we have a lot of variance in customers spendings in those categories. It also correlates with a decrease in <em>Fresh</em> and <em>Frozen</em>. This pattern might represent spending for large retailer store.</li>
+<li>PC2: This Pattern shows a large variance of <em>Fresh</em>, <em>Frozen</em> and <em>Delicatessen</em> in the same positive direction and small weights in the other categories. This PC could represent the spending pattern of a food market. </li>
+<li>PC3: customers with high values in this dimension buys significants quantities of <em>Delicatessen</em> and <em>Frozen</em>, while strongly not spending on <em>Fresh</em> and not spending in <em>Detergents_Paper</em> as well. This pattern could be capturing purchasing habits of a gas station store.</li>
+<li>PC4: This dimension is made up of a large weight of <em>Frozen</em> and a significant weight of <em>Detergents_Paper</em> both in the positive direction. Negative weights in <em>Delicatessen</em> and <em>Fresh</em> show that spendings in these categories are inversely proportional to the ones with positive weights. This pattern could be representing fast food restaurants spendings.</li>
 </ul>
 
 </div>
@@ -25083,6 +25092,11 @@ HfP/AUxTNhqRSui+AAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> Based on those data <em>Segment 0</em> represent Retailers/food markets as they tend to buy a lot of <em>Fresh</em> and <em>Frozen</em> and not to buy "Detergents_Paper". <em>Segment 1</em> represents Restaurants, Hotels and Cafes all together as they all tend to buy a big volumes of <em>Grocery</em>, <em>Detergents_Paper</em> and <em>Milk</em>.</p>
+<p><strong>Review:</strong></p>
+<ul>
+<li>The <em>Segment 0</em> cluster center is higher than the median (50%) in <em>Fresh</em> and <em>Frozen</em> and lower (a bit above the 25% mark) in the other categories. This customer segment could represent restaurants.</li>
+<li>The <em>Segment 1</em> cluster center is higher than average in <em>Grocery</em>, <em>Detergents_Paper</em> and <em>Milk</em> and above the median in <em>Delicatessen</em>. This customer segment could represent Grocery stores.</li>
+</ul>
 
 </div>
 </div>
@@ -25135,6 +25149,15 @@ Sample point 2 predicted to be in Cluster 1
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> Sample points 0 and 2 belongs to the Hotel/Cafe/Restaurant cluster and the other point to the Markets cluster. These predictions are consistent with the identified segments.</p>
+<p><strong>Review:</strong></p>
+<ul>
+<li><p>For sample point 0, the values for <em>Grocery</em>, <em>Milk</em> and <em>Detergents_Paper</em> are above average and <em>Delicatessen</em> is above the median. This displays the same spending behavior as <code>segment 1</code> cluster center, so the predicted cluster seems to be consistent with the sample, even though this sample point also has a value of <em>Fresh</em> higher than expected.</p>
+</li>
+<li><p>For sample point 1, the values for <em>Fresh</em> and <em>Frozen</em> and <em>Detergents_Paper</em> are above average. This mirrors the pattern of <code>segment 0</code> cluster center, so the predicted cluster seems to be consistent with the sample, even though this sample point also has a value of <em>Delicatessen</em> higher than expected.</p>
+</li>
+<li><p>For sample point 2, the values for <em>Grocery</em> and <em>Detergents_Paper</em> are above average. This one also shows a spending behavior closer to <code>segment 1</code> cluster center, so the predicted cluster seems to be consistent with the sample, even though the values of <em>Fresh</em> and <em>delicatessen</em> are way lower than expected.</p>
+</li>
+</ul>
 
 </div>
 </div>
@@ -25176,6 +25199,13 @@ Sample point 2 predicted to be in Cluster 1
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> I would imagine that reducing the frequency of deliveries could negatively affect businesses relying on <em>Fresh</em> as being fresh is a key selling proposition for that product category. The challenge that would occur for the remaining product types is inventory management, which I suppose can be dealt with without too much trouble.
 We could verify that assumption by observing if the change in delivery service is causing a drop in sales for the <em>Retailers</em> segment (significantly fewer orders in <em>Fresh</em>, <em>Frozen</em> but also <em>Delicatessen</em> in a smaller proportion).</p>
+<p><strong>Review:</strong> To prove our hypothesis, we can conduct two A/B tests following the steps bellow:</p>
+<ol>
+<li>We chose two groups of customers in the left cluster (cluster 0) with the exact same spending behaviors (values are going to be different but the trend has to be the same).</li>
+<li>We change the delivery schedule for one of the groups (and thus make it the treatment group) and compare it to the other group for which the delivery service remains the same (control group). We observe if there are any significant differences in spending between those two groups after the experiment.</li>
+<li>We also conduct the same A/B test with the same conditions in the right cluster (cluster 1).</li>
+</ol>
+<p>If we see significant variations only between the groups in the left cluster (the one that spends more money on <em>Fresh</em>) and pretty much no variation in spending for the right cluster, then we could conclude that changing the delivery schedule would affect customers in cluster 0 only. If we detect significant differences in spending between groups for both clusters, our conclusion would be that the change in delivery service would affect customers in both segments. The other advantage of running experiments on small groups in our segments instead of splitting the segments into two equal groups is also to minimize the cost of an eventual negative impact. Although we have to set the groups' size in a way that leads to statistically significant results.</p>
 
 </div>
 </div>
